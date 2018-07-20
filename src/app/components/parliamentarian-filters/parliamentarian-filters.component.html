@@ -1,0 +1,40 @@
+<ion-menu side="end" [contentId]="contentId">
+  <div class="content">
+    <ion-header class="header">
+      Filtros
+    </ion-header>
+    
+    <form class="filter-form" [formGroup]="form">
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Filtrar por:</ion-label>
+        </ion-list-header>
+        <ion-item class="filters" *ngFor="let filter of filterList" (click)="toggle(filter)">
+          <ion-label>
+            {{ filter.label }}
+            <app-expandable [open]="filter.isOpen">
+              <ion-list>
+                <ion-item [formArrayName]="filter.name" *ngFor="let option of form.controls[filter.name].controls; let i = index">
+                  <ion-checkbox color="tertiary" [formControlName]="i"></ion-checkbox>
+                  <ion-label>{{ filter.options[i].label }}</ion-label>
+                </ion-item>
+              </ion-list>
+            </app-expandable>
+          </ion-label>
+          <ion-button slot="end" fill="clear" class="btn-expand">
+            <ion-icon name="arrow-dropdown"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      
+      <ion-buttons padding>
+        <ion-button (click)="submit()" color="tertiary" fill="solid">
+          Filtrar
+        </ion-button>
+        <ion-button color="tertiary" fill="clear">
+          Limpar
+        </ion-button>
+      </ion-buttons>
+    </form>
+  </div>
+</ion-menu>

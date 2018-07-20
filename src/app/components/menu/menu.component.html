@@ -1,0 +1,35 @@
+<ion-menu type="reveal" side="start" [contentId]="contentId" #menu>
+  <ion-header>
+    <figure class="banner">
+      <img src="assets/imgs/menu/header.png" alt="Banner">
+    </figure>
+    <div class="border"></div>
+  </ion-header>
+
+  <ion-list class="navigation" >
+    <ion-item class="nav-link" tappable menuClose="left" (click)="openPage('/home')">
+      <ion-icon class="color--primary" name="home"></ion-icon>
+      <span class="text">Home</span>
+    </ion-item>
+    <ion-item class="nav-link" tappable menuClose="start" (click)="openPage('/parliamentarians')">
+      <ion-icon class="color--primary" name="people"></ion-icon>
+      <span class="text">Politicos</span>
+    </ion-item>
+    <ion-item class="nav-link" tappable menuClose="start" (click)="openPage('/home')">
+      <ion-icon class="color--primary" name="flag"></ion-icon>
+      <span class="text">Partidos</span>
+    </ion-item>
+    <ion-item class="nav-link" tappable menuClose="start" (click)="openPage('/home')">
+      <ion-icon class="color--primary" name="calendar"></ion-icon>
+      <span class="text">Eventos</span>
+    </ion-item>
+    <ion-item class="nav-link" tappable menuClose="start" (click)="openPage('/home')">
+      <ion-icon class="color--primary" name="paper"></ion-icon>
+      <span class="text">Proposições</span>
+    </ion-item>
+    <ion-item class="nav-link" tappable menuClose="start" (click)="openPage('/home')">
+      <ion-icon class="color--gray" name="information-circle-outline"></ion-icon>
+      <span class="text">Sobre</span>
+    </ion-item>
+  </ion-list>
+</ion-menu>

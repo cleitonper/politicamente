@@ -1,0 +1,16 @@
+<div class="searchbar">
+  <header>
+    <span class="label">O que você está procurando?</span>
+    <ion-button class="btn btn-close" fill="clear" (click)="close()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </header>
+  
+  <div class="search-form">
+    <input class="textbox" type="search" placeholder="pesquisar...">
+    <ion-button class="btn btn-submit" fill="clear">
+      <ion-icon name="search"></ion-icon>
+    </ion-button>
+  </div>
+</div>
+<div (click)="close()" class="layer"></div>

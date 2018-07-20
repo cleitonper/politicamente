@@ -1,0 +1,97 @@
+.splash-wrapper {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.splash,
+.splash > div {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.splash {
+  display: block;
+  font-size: 0;
+  color: #2A2E43;
+}
+
+.splash > div {
+  display: inline-block;
+  background-color: currentColor;
+  border: 0 solid currentColor;
+}
+
+.splash {
+  width: 84px;
+  height: 64px;
+}
+
+.splash > div:nth-child(1) {
+  position: absolute;
+  bottom: 32%;
+  left: 18%;
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  transform-origin: center bottom;
+  animation: ball-jump .6s ease-in-out infinite;
+}
+
+.splash > div:not(:nth-child(1)) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 4px;
+  border-radius: 0;
+  transform: translate(60%, 0);
+  animation: ball-steps 1.8s linear infinite;
+}
+
+.splash > div:not(:nth-child(1)):nth-child(2) {
+  animation-delay: 0ms;
+}
+
+.splash > div:not(:nth-child(1)):nth-child(3) {
+  animation-delay: -600ms;
+}
+
+.splash > div:not(:nth-child(1)):nth-child(4) {
+  animation-delay: -1200ms;
+}
+
+/*
+ * Animations
+ */
+@keyframes ball-jump {
+  0%   { transform: scale(1, 0.7) }
+  20%  { transform: scale(0.7, 1.2) }
+  40%  { transform: scale(1, 1) }
+  50%  { bottom: 125% }
+  46%  { transform: scale(1, 1) }
+  80%  { transform: scale(0.7, 1.2) }
+  90%  { transform: scale(0.7, 1.2) }
+  100% { transform: scale(1, 0.7) }
+}
+
+@keyframes ball-steps {
+  0% {
+    top: 0;
+    right: 0;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 100%;
+    right: 100%;
+    opacity: 0;
+  }
+}

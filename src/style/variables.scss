@@ -1,0 +1,86 @@
+/** App variables **/
+
+:root {
+  /** App Variables **/
+  /**
+  *   The variables descrebed bellow was
+  *   used for app style.
+  */
+
+  /** primary **/
+  --color-primary: #3497FD;
+  --color-primary-rgb: 52, 151, 253;
+
+  /** secondary **/
+  --color-secondary: #3ACCE1;
+  --color-secondary-rgb: 58, 204, 225;
+
+  /** tertiary **/
+  --color-tertiary: #FF4F9A;
+  --color-tertiary-rgb: 255, 79, 154;
+
+  /** success **/
+  --color-success: #1ABC9C;
+  --color-success-rgb: 26, 188, 156;
+
+  /** warning **/
+  --color-warning: #FEF33E;
+  --color-warning-rgb: 254, 243, 62;
+
+  /** danger **/
+  --color-danger: #f53d3d;
+  --color-danger-rgb: 245,61,61;
+
+  /** light **/
+  --color-light: #f4f4f4;
+  --color-light-rgb: 244,244,244;
+  
+  /** gray **/
+  --color-gray: #666666;
+  --color-gray-rgb: 102, 102, 102;
+  --color-gray-light: #e8eaef;
+  --color-gray-light-rgb: 232, 234, 239;
+
+  /** dark **/
+  --color-dark: #2A2E43;
+  --color-dark-rgb: 42, 46, 67;
+  --color-dark-medium: #454F63;
+  --color-dark-medium-rgb: 69, 79, 99;
+  --color-dark-light: #78849E;
+  --color-dark-light-rgb: 120, 132, 158;
+
+  /** blue **/
+  --color-iceblue: #C3F2FF;
+  --color-iceblue-rgb: 195, 242, 255;
+  --color-oceanblue: #008ABE;
+  --color-oceanblue-rgb: 0, 138, 190;
+  --color-darkblue: #0D2E3F;
+  --color-darkblue-rgb: 13, 46, 63;
+
+  /** purple **/
+  --color-purple: #665EFF;
+  --color-purple-rgb: 102, 94, 255;
+  --color-purple-light: #5773FF;
+  --color-purple-light-rgb: 86, 114, 254;
+
+
+  
+  /** Ionic Variables **/
+  /**
+  *   The variables descrebed bellow was
+  *   used for ionic framework components
+  *   customization.
+  */
+
+  /** Colors **/
+  --ion-color-primary: var(--color-primary);
+  --ion-color-secondary: var(--color-secondary);
+  --ion-color-tertiary: var(--color-tertiary);
+
+  /** Toolbar **/
+  --ion-toolbar-background-color: var(--color-dark);
+  --ion-toolbar-text-color: var(--color-light);
+
+  /** Item **/
+  --ion-item-text-color: var(--color-dark);
+}

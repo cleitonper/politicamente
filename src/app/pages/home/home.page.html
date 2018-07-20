@@ -1,0 +1,43 @@
+<app-header title="Home"></app-header>
+
+<ion-content>
+  <article class="home-banner">
+    <h2 class="banner-title">Bem Vindo!</h2>
+
+    <p class="banner-content">
+      Fique por dentro da politica brasileira.
+    </p>
+
+    <p class="banner-content typing-container">
+      <span id="typing"></span>
+    </p>
+
+    <div class="banner-content" id="type-strings">
+      <span>Conheça.</span>
+      <span>Acompanhe.</span>
+      <span>Participe.</span>
+    </div>
+
+    <img src="assets/imgs/art/scrolldown.png" class="scrolldown">
+  </article>
+
+  <section class="app-topics">
+    <article *ngFor="let topic of topics" [class]="'app-topic ' + topic.name">
+      <h2 class="topic-title">{{ topic.title }}</h2>
+
+      <p class="topic-content">
+        {{ topic.content }}
+      </p>
+
+      <figure>
+        <img [src]="'/assets/imgs/home/' + topic.name + '.jpg'">
+      </figure>
+
+      <ion-button (click)="openPage(topic.name)" class="btn" fill="outline" expand="block">
+        {{ topic.label }}
+        <ion-icon slot="end" name="ios-arrow-round-forward"></ion-icon>
+      </ion-button>
+    </article>
+  </section>
+  <app-footer></app-footer>
+</ion-content>

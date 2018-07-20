@@ -1,0 +1,71 @@
+ion-menu /deep/ .menu-inner {
+  justify-content: flex-start;
+  overflow-y: auto;
+}
+
+.banner {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--color-dark-rgb), 0.9);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.border {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    var(--color-purple) 0%,
+    var(--color-purple) 25%,
+    var(--color-purple-light) 25%,
+    var(--color-purple-light) 50%,
+    var(--color-primary) 50%,
+    var(--color-primary) 75%,
+    var(--color-secondary) 75%,
+    var(--color-secondary) 100%);
+}
+
+.navigation {
+  padding: 8px 0px;
+
+  .nav-link {
+    width: 100%;
+    padding: 8px;
+
+    ion-icon {
+      margin-right: 12px;
+      font-size: 1.5em;
+    }
+
+    .text {
+      font-size: 20px;
+    }
+
+    ion-icon,
+    .text {
+      transition: color 400ms;
+    }
+
+    &.active ion-icon,
+    &:hover ion-icon {
+      color: var(--color-purple);
+    }
+  }
+}

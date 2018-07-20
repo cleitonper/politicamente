@@ -1,0 +1,66 @@
+<ng-container *ngIf="(parliamentarians$ | async) as parliamentarians">
+  <ng-container *ngIf="parliamentarians.length">
+    <div class="search">
+      <ion-searchbar
+        [showCancelButton]="false"
+        (ionInput)="searchedTerm$.next($event.target.value)"
+      >
+      </ion-searchbar>
+      <ion-menu-toggle menu="end" class="btn-filter">
+        <ion-button fill="clear">
+          <ion-icon name="md-funnel"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </div>
+  
+    <ion-grid class="list">
+      <ion-row [@fadeIn]="parliamentarians.length">
+        <ion-col *ngFor="let parliamentarian of parliamentarians" col-12 col-md-6 col-lg-4>
+          <ion-card class="parliamentarian">
+            <ion-item button padding-right>
+              <ion-avatar class="avatar">
+                <img [src]="parliamentarian.urlFoto" (error)="setGenericAvatar($event.target)">
+              </ion-avatar>
+              <ion-label>
+                <h2 class="title">{{ parliamentarian.nome }}</h2>
+                <p class="description">Deputado - {{ parliamentarian.siglaPartido }}</p>
+              </ion-label>
+              <ion-note class="meta">{{ parliamentarian.siglaUf }}</ion-note>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ng-container *ngIf="(page$ | async) as page">
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="page.self < page.last">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </ng-container>
+
+    </ion-grid>
+  
+  </ng-container>
+</ng-container>
+
+<div *ngIf="isLoading$ | async" class="skeleton">
+  <div class="search" *ngIf="!(parliamentarians$ | async)?.length">
+    <div class="searchbar"></div>
+  </div>
+
+  <ion-grid class="list fake">
+    <ion-row>
+      <ion-col *ngFor="let fake of fakes" col-12 col-md-6 col-lg-4>
+        <ion-card class="parliamentarian">
+          <ion-item button padding-right>
+            <ion-avatar class="avatar"></ion-avatar>
+            <ion-label>
+              <h2 class="title"></h2>
+              <p class="description"></p>
+            </ion-label>
+            <ion-note class="meta"></ion-note>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

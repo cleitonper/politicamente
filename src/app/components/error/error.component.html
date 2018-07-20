@@ -1,0 +1,9 @@
+<div *ngIf="(error$ | async) as error" class="error">
+  <div class="icon-wrapper">
+    <ion-icon class="icon" name="information-circle-outline"></ion-icon>
+  </div>
+
+  <h1 class="code">{{ error.status }}</h1>
+  <h2 class="title">{{ error.title }}</h2>
+  <h3 class="detail">{{ error.detail }}</h3>
+</div>
