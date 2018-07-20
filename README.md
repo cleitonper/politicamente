@@ -15,7 +15,7 @@ You'll need `nodejs` and `npm` to install the project dependencies. Get instruct
 You'll also need to have the `angular-cli` globally installed. To install it, type in your terminal the following:
 
 ```
-npm install @angular/cli
+npm install -g @angular/cli
 ```
 
 ### Installing Project Dependencies
