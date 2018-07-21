@@ -42,7 +42,7 @@
   </ng-container>
 </ng-container>
 
-<div *ngIf="isLoading$ | async" class="skeleton">
+<div *ngIf="!dataInitialized || (isLoading$ | async)" class="skeleton">
   <div class="search" *ngIf="!(parliamentarians$ | async)?.length">
     <div class="searchbar"></div>
   </div>

@@ -1,4 +1,8 @@
-import { Component, OnInit, OnDestroy }   from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+}                              from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Store }               from '@ngrx/store';
 import {
@@ -25,6 +29,7 @@ import {
 })
 export class ParliamentarianListComponent implements OnInit, OnDestroy {
   public fakes;
+  public dataInitialized = false;
   public parliamentarians$: Observable<Array<Parliamentarian>>;
   public isLoading$: Observable<boolean>;
   public searchedTerm$ = new Subject<string>();
@@ -36,13 +41,7 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.fakes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    this.parliamentarians$ = this.store.select(ParliamentarianSelector.list);
-    this.isLoading$ = this.store.select(ParliamentarianSelector.isLoading);
-    this.page$ = this.store.select(ParliamentarianSelector.page);
-
-    this.store.dispatch(new ParliamentarianAction.LoadList());
-
+    this.initializeData();
     this.initializeAutoSearch();
   }
 
@@ -70,5 +69,17 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
         (new ParliamentarianAction.Filter({ nome: term }))
       )
     ).subscribe();
+  }
+
+  private initializeData() {
+    this.fakes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+    setTimeout(() => {
+      this.store.dispatch(new ParliamentarianAction.LoadList());
+      this.parliamentarians$ = this.store.select(ParliamentarianSelector.list);
+      this.isLoading$ = this.store.select(ParliamentarianSelector.isLoading);
+      this.page$ = this.store.select(ParliamentarianSelector.page);
+      this.dataInitialized = true;
+    }, 3000);
   }
 }

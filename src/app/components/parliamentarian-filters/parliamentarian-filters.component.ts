@@ -14,7 +14,7 @@ import {
   ParliamentarianState,
   ParliamentarianAction
 }                                from '../../state/parliamentarian';
-import { MenuController } from '@ionic/angular';
+import { MenuController }        from '@ionic/angular';
 
 /**
  * TODO: Implement clear filters feature

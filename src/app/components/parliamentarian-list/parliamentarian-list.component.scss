@@ -1,8 +1,11 @@
 @import 'mixins';
 @import 'animations';
 
-.list:not(.fake) {
+.list {
   min-height: calc(100vh - 130px);
+}
+
+.list:not(.fake) {
   position: relative;
 
   .avatar img {
