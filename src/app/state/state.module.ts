@@ -9,13 +9,19 @@ import { StoreDevtoolsModule }         from '@ngrx/store-devtools';
 import { environment }                 from '../../environments/environment';
 import { ParliamentarianStateModule }  from './parliamentarian/parliamentarian-state.module';
 
+const devModules = [];
+
+if (!environment.production) {
+  devModules.push(StoreDevtoolsModule.instrument());
+}
+
 @NgModule({
   imports: [
     CommonModule,
     ParliamentarianStateModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ logOnly: !environment.production }),
+    ...devModules,
   ],
 })
 export class StateModule {}
