@@ -31,7 +31,7 @@
         </ion-col>
       </ion-row>
 
-      <ng-container *ngIf="(page$ | async) as page">
+      <ng-container *ngIf="!(error$ | async) && (page$ | async) as page">
         <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="page.self < page.last">
           <ion-infinite-scroll-content></ion-infinite-scroll-content>
         </ion-infinite-scroll>

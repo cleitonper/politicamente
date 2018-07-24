@@ -3,6 +3,7 @@ import {
   OnDestroy,
   OnInit,
 }                              from '@angular/core';
+import { HttpErrorResponse }   from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Store }               from '@ngrx/store';
 import {
@@ -34,6 +35,7 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
   public isLoading$: Observable<boolean>;
   public searchedTerm$ = new Subject<string>();
   public page$: Observable<Page>;
+  public error$: Observable<HttpErrorResponse>;
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -79,6 +81,7 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
       this.parliamentarians$ = this.store.select(ParliamentarianSelector.list);
       this.isLoading$ = this.store.select(ParliamentarianSelector.isLoading);
       this.page$ = this.store.select(ParliamentarianSelector.page);
+      this.error$ = this.store.select(ParliamentarianSelector.error);
       this.dataInitialized = true;
     }, 3000);
   }
