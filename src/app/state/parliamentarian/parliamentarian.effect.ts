@@ -2,13 +2,19 @@ import { HttpErrorResponse }       from '@angular/common/http';
 import { Injectable }              from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Action, Store }           from '@ngrx/store';
-import { Observable, of }          from 'rxjs';
+import {
+  Observable,
+  fromEvent,
+  merge,
+  of,
+}                                  from 'rxjs';
 import {
   withLatestFrom,
   catchError,
   switchMap,
   pluck,
   map,
+  mapTo,
 }                                  from 'rxjs/operators';
 
 import { ParliamentarianService }  from '../../services/parliamentarian.service';
@@ -27,14 +33,33 @@ import {
   SetPage,
 }                                  from './parliamentarian.action';
 
-
 @Injectable()
 export class ParliamentarianEffects {
+  private online$: Observable<boolean>;
+  private offlineError;
+
   constructor(
     private actions: Actions,
     private store: Store<AppState>,
     private parliamentarianService: ParliamentarianService,
-  ) {}
+  ) {
+    this.init();
+  }
+
+  private init() {
+    this.online$ = merge(
+      of(navigator.onLine),
+      fromEvent(window, 'online').pipe(mapTo(true)),
+      fromEvent(window, 'offline').pipe(mapTo(false)),
+    );
+
+    const error = {
+      status: 'Offline',
+      title: 'Você está desconectado',
+      detail: 'É necessária uma conexão ativa com a internet para acessar os recursos desta página.'
+    };
+    this.offlineError = new HttpErrorResponse({ error: error });
+  }
 
   @Effect()
   loadList: Observable<Action> = this.actions.pipe(
@@ -46,7 +71,14 @@ export class ParliamentarianEffects {
         new LoadListSuccess(parliamentarians.data),
         new SetPage(parliamentarians.page)
       ]),
-      catchError((error: HttpErrorResponse) => of(new LoadError(error.error))),
+      catchError(
+        (error: HttpErrorResponse) => of(error).pipe(
+          withLatestFrom(this.online$),
+          switchMap(
+            ([error, isOnline]) => (isOnline) ? of(new LoadError(error.error)) : of(new LoadError(this.offlineError.error))
+          )
+        )
+      ),
     )),
   );
 
@@ -63,7 +95,14 @@ export class ParliamentarianEffects {
     pluck('payload', 'id'),
     switchMap((id: number) => this.parliamentarianService.read(id).pipe(
       map((parliamentarian) => new LoadSuccess(parliamentarian)),
-      catchError((error: HttpErrorResponse) => of(new LoadError(error.error))),
+      catchError(
+        (error: HttpErrorResponse) => of(error).pipe(
+          withLatestFrom(this.online$),
+          switchMap(
+            ([error, isOnline]) => (isOnline) ? of(new LoadError(error.error)) : of(new LoadError(this.offlineError.error))
+          )
+        )
+      ),
     )),
   );
 
@@ -83,7 +122,14 @@ export class ParliamentarianEffects {
         new FilterSuccess(parliamentarians.data),
         new SetPage(parliamentarians.page),
       ]),
-      catchError((error: HttpErrorResponse) => of(new LoadError(error.error)))
+      catchError(
+        (error: HttpErrorResponse) => of(error).pipe(
+          withLatestFrom(this.online$),
+          switchMap(
+            ([error, isOnline]) => (isOnline) ? of(new LoadError(error.error)) : of(new LoadError(this.offlineError.error))
+          )
+        )
+      ),
     )),
   );
 }
