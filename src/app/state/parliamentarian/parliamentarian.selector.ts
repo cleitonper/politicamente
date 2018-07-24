@@ -18,6 +18,7 @@ const getSelectedParliamentarianId = (state: State) => state.selectedParliamenta
 const getEerror = (state: State) => state.error;
 const getIsLoading = (state: State) => state.isLoading;
 const getPage = (state: State) => state.page;
+const getFilters = (state: State) => state.filters;
 
 export const list = createSelector(
   selectParliamentarianState,
@@ -42,4 +43,9 @@ export const error = createSelector(
 export const page = createSelector(
   selectParliamentarianState,
   getPage
+);
+
+export const filters = createSelector(
+  selectParliamentarianState,
+  getFilters
 );

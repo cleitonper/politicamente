@@ -14,8 +14,11 @@ import {
 }                              from 'rxjs/operators';
 
 import { fadeIn }              from '../../shared/animation';
-import { Parliamentarian }     from '../../shared/model/parliamentarian.model';
 import { Page }                from '../../shared/model/page.model';
+import {
+  Parliamentarian,
+  ParliamentarianParams
+}                              from '../../shared/model/parliamentarian.model';
 import {
   ParliamentarianSelector,
   ParliamentarianAction,
@@ -36,6 +39,7 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
   public searchedTerm$ = new Subject<string>();
   public page$: Observable<Page>;
   public error$: Observable<HttpErrorResponse>;
+  public filters$: Observable<ParliamentarianParams>;
   private ngUnsubscribe = new Subject();
 
   constructor(
@@ -82,6 +86,7 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
       this.isLoading$ = this.store.select(ParliamentarianSelector.isLoading);
       this.page$ = this.store.select(ParliamentarianSelector.page);
       this.error$ = this.store.select(ParliamentarianSelector.error);
+      this.filters$ = this.store.select(ParliamentarianSelector.filters);
       this.dataInitialized = true;
     }, 3000);
   }

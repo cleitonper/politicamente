@@ -16,7 +16,7 @@ export function parliamentarianReducer(
     case ParliamentarianActionType.LOAD_LIST:
       return { ...state, isLoading: true };
     case ParliamentarianActionType.LOAD_LIST_SUCCESS: {
-      const newState = { ...state, isLoading: false, hasError: false };
+      const newState = { ...state, isLoading: false, error: null };
       return adapter.addMany(action.payload, newState);
     }
     case ParliamentarianActionType.LOAD_SUCCESS:
@@ -24,11 +24,11 @@ export function parliamentarianReducer(
     case ParliamentarianActionType.INCREMENT_PAGE:
       return { ...state, filters: { ...state.filters, pagina: action.payload } };
     case ParliamentarianActionType.FILTER:
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, ids: [], entities: {} };
     case ParliamentarianActionType.SET_FILTERS:
       return { ...state, filters: action.payload };
     case ParliamentarianActionType.FILTER_SUCCESS: {
-      const newState = { ...state, isLoading: false, hasError: false };
+      const newState = { ...state, isLoading: false, error: null };
       return adapter.addAll(action.payload, newState);
     }
     case ParliamentarianActionType.UPDATE_PAGE_DETAIL:
