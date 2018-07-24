@@ -2,6 +2,8 @@ import {
   ComponentFixture,
   TestBed,
   async,
+  fakeAsync,
+  tick,
 }                                       from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA }       from '@angular/core';
 import { HttpClientModule }             from '@angular/common/http';
@@ -64,31 +66,36 @@ describe('Component: ParliamentarianList', () => {
     expect(component.fakes.length).toBe(15);
   });
 
-  it('should dispatch an LoadList action after component initializes', () => {
+  it('should dispatch an LoadList action after component initializes', fakeAsync(() => {
     const spy = spyOn(store, 'dispatch');
     const action = new ParliamentarianAction.LoadList();
     component.ngOnInit();
+    tick(3200);
     expect(spy).toHaveBeenCalledWith(action);
-  });
+  }));
 
-  it('should display a list of parliamentarians after data is loaded', () => {
+  it('should display a list of parliamentarians after data is loaded', fakeAsync(() => {
     const parliamentarianList = generateParliamentarianList();
     const action = new ParliamentarianAction.LoadListSuccess(parliamentarianList.data);
     store.dispatch(action);
+    component.ngOnInit();
+    tick(3200);
     component.parliamentarians$.subscribe(
       (parliamentarians) => expect(parliamentarians).toEqual(parliamentarianList.data)
     );
     component.isLoading$.subscribe(
       (isLoading) => expect(isLoading).toBeFalsy()
     );
-  });
+  }));
 
-  it('should select the page details on the state', () => {
+  it('should select the page details on the state', fakeAsync(() => {
     const parliamentarianList = generateParliamentarianList();
     const action = new ParliamentarianAction.SetPage(parliamentarianList.page);
     store.dispatch(action);
+    component.ngOnInit();
+    tick(3200);
     component.page$.subscribe((page) => expect(page).toEqual(parliamentarianList.page));
-  });
+  }));
 
   it('should dispatch a Filter action when searching', () => {
     const term = 'Joana';
