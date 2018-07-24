@@ -28,8 +28,7 @@
     {
       "name": "api-performace",
       "urls": [
-        "https://dadosabertos.camara.leg.br/api/v2/deputados",
-        "http://www.camara.leg.br/internet/deputado/bandep/*.jpg"
+        "https://dadosabertos.camara.leg.br/api/v2/deputados?pagina=1"
       ],
       "cacheConfig": {
         "strategy": "performance",
