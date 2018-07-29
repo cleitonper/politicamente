@@ -1,4 +1,4 @@
-import { Component, Input }      from '@angular/core';
+import { Component, Input, OnInit, ViewChild }      from '@angular/core';
 import { Store }                 from '@ngrx/store';
 import {
   FormBuilder,
@@ -25,22 +25,54 @@ import { MenuController }        from '@ionic/angular';
   templateUrl: './parliamentarian-filters.component.html',
   styleUrls: ['./parliamentarian-filters.component.scss']
 })
-export class ParliamentarianFiltersComponent {
+export class ParliamentarianFiltersComponent implements OnInit {
   @Input()
   public contentId: string;
   public filterList: Array<Filter>;
   public form: FormGroup;
+  public initialized = false;
 
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<ParliamentarianState.State>,
     private menu: MenuController,
-  ) {
-    this.initializeFilters();
-    this.initializeForm();
+  ) {}
+
+  ngOnInit() {
+    this.init().then((status) => this.initialized = status);
   }
 
+
+  private getFilters(): Promise<Array<Filter>> {
+    return Promise.resolve([
+      { name: 'siglaUf',      label: 'Estado',  isOpen: false, options: states },
+      { name: 'siglaPartido', label: 'Partido', isOpen: false, options: parties },
+    ]);
+  }
+
+
+  private getFormGroup(filters: Array<Filter>): Promise<FormGroup> {
+    return new Promise((resolve) => {
+      const formArrayList: Array<FormArray> = [];
+  
+      for (const filter of filters) {
+        const controls = filter.options.map((option) => new FormControl(false));
+        formArrayList[filter.name] = new FormArray(controls);
+      }
+      
+      setTimeout(() => {
+        resolve(this.formBuilder.group(formArrayList));
+      }, 10000);
+    });
+  }
+
+  private async init(): Promise<boolean> {
+    this.filterList = await this.getFilters();
+    this.form = await this.getFormGroup(this.filterList);
+
+    return true;
+  }
 
   public toggle(filter: Filter, filters = this.filterList): void {
     filters = filters.map((item) => {
@@ -49,26 +81,6 @@ export class ParliamentarianFiltersComponent {
         return item;
       }
     });
-  }
-
-
-  private initializeFilters(): void {
-    this.filterList = [
-      { name: 'siglaUf',      label: 'Estado',  isOpen: false, options: states },
-      { name: 'siglaPartido', label: 'Partido', isOpen: false, options: parties },
-    ];
-  }
-
-
-  private initializeForm(): void {
-    const formArrayList: Array<FormArray> = [];
-
-    for (const filter of this.filterList) {
-      const controls = filter.options.map((option) => new FormControl(false));
-      formArrayList[filter.name] = new FormArray(controls);
-    }
-
-    this.form = this.formBuilder.group(formArrayList);
   }
 
   private getSelectedFilters(): ParliamentarianParams {

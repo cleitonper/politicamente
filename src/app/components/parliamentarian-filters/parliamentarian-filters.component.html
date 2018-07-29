@@ -4,17 +4,17 @@
       Filtros
     </ion-header>
     
-    <form class="filter-form" [formGroup]="form">
-      <ion-list>
+    <form class="filter-form" [formGroup]="form" *ngIf="initialized; else loading">
+      <ion-list class="filters">
         <ion-list-header>
           <ion-label>Filtrar por:</ion-label>
         </ion-list-header>
-        <ion-item class="filters" *ngFor="let filter of filterList" (click)="toggle(filter)">
+        <ion-item class="filter" *ngFor="let filter of filterList" (click)="toggle(filter)">
           <ion-label>
             {{ filter.label }}
             <app-expandable [open]="filter.isOpen">
               <ion-list>
-                <ion-item [formArrayName]="filter.name" *ngFor="let option of form.controls[filter.name].controls; let i = index">
+                <ion-item class="filter-option" [formArrayName]="filter.name" *ngFor="let option of form.controls[filter.name].controls; let i = index">
                   <ion-checkbox color="tertiary" [formControlName]="i"></ion-checkbox>
                   <ion-label>{{ filter.options[i].label }}</ion-label>
                 </ion-item>
@@ -36,5 +36,11 @@
         </ion-button>
       </ion-buttons>
     </form>
+
+    <ng-template #loading>
+      <div class="loading">
+        <ion-spinner name="lines"></ion-spinner>
+      </div>
+    </ng-template>
   </div>
 </ion-menu>

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA }           from '@angular/core';
 import { ReactiveFormsModule }              from '@angular/forms';
 import { HttpClientModule }                 from '@angular/common/http';
@@ -46,12 +46,14 @@ describe('Component: ParliamentarianFilters', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch a Filter action when submited', () => {
+  it('should dispatch a Filter action when submited', fakeAsync(() => {
     const spy = spyOn(store, 'dispatch');
     const action = new ParliamentarianAction.Filter({});
+    component.ngOnInit();
+    tick(10100);
     component.submit();
     expect(spy).toHaveBeenCalledWith(action);
-  });
+  }));
 
   // TODO: add more tests.
 
