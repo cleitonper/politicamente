@@ -28,7 +28,7 @@
     {
       "name": "api-performace",
       "urls": [
-        "https://dadosabertos.camara.leg.br/api/v2/deputados?pagina=1"
+        "https://dadosabertos.camara.leg.br/api/v2/deputados"
       ],
       "cacheConfig": {
         "strategy": "performance",
