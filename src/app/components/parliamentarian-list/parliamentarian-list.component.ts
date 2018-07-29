@@ -33,7 +33,7 @@ import {
 })
 export class ParliamentarianListComponent implements OnInit, OnDestroy {
   public fakes;
-  public dataInitialized = false;
+  public initialized = false;
   public parliamentarians$: Observable<Array<Parliamentarian>>;
   public isLoading$: Observable<boolean>;
   public searchedTerm$ = new Subject<string>();
@@ -87,7 +87,7 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
       this.page$ = this.store.select(ParliamentarianSelector.page);
       this.error$ = this.store.select(ParliamentarianSelector.error);
       this.filters$ = this.store.select(ParliamentarianSelector.filters);
-      this.dataInitialized = true;
+      this.initialized = true;
     }, 3000);
   }
 }

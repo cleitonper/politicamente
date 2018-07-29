@@ -4,6 +4,7 @@
     [style.display]="(
       parliamentarians.length ||
       (filters$ | async)?.nome ||
+      (filters$ | async)?.nome === '' ||
       (error$ | async)?.status == 405)
         ? 'block'
         : 'none'
@@ -58,12 +59,31 @@
   </ng-container>
 </ng-container>
 
-<div class="skeleton" *ngIf="!dataInitialized || (isLoading$ | async)">
-  <div class="search" *ngIf="!(filters$ | async)?.nome && !(parliamentarians$ | async)?.length">
+<div
+  class="skeleton"
+  *ngIf="!initialized || (isLoading$ | async)"
+>
+  <div
+    class="search"
+    *ngIf="
+      !initialized ||
+      (
+        (filters$ | async)?.nome === undefined  &&
+        !(parliamentarians$ | async)?.length
+      )
+    "
+  >
     <div class="searchbar"></div>
   </div>
 
-  <ion-grid class="list fake" [style.min-height]="(parliamentarians$ | async)?.length < 16 ? 'calc(100vh - 130px)' : '0px'">
+  <ion-grid
+    class="list fake"
+    [style.min-height]="
+      (parliamentarians$ | async)?.length < 16
+        ? 'calc(100vh - 130px)'
+        : '0px'
+      "
+  >
     <ion-row>
       <ion-col *ngFor="let fake of fakes" col-12 col-md-6 col-lg-4>
         <ion-card class="parliamentarian">
