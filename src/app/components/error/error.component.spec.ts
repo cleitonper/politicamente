@@ -39,13 +39,13 @@ describe('Component: Error', () => {
   });
 
   it('should get a error on the state when LoadError action is dispatched', () => {
-    const error = { status: 404, title: 'Not Found', detail: 'HTTP Error' };
-    const httpError = new HttpErrorResponse(error);
+    const errorDetail = { status: 404, title: 'Not Found', detail: 'HTTP Error' };
+    const httpError = new HttpErrorResponse(errorDetail);
     const action = new ParliamentarianAction.LoadError(httpError);
     store.dispatch(action);
-    
+
     component.error$.subscribe(
-      (error) => expect(error === httpError).toBeTruthy()
+      (storedError) => expect(storedError === httpError).toBeTruthy()
     );
   });
 });

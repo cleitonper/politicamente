@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges, ViewChild, ElementRef, HostListener } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  SimpleChanges,
+  OnChanges,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'app-expandable',

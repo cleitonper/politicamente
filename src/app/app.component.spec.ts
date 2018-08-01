@@ -12,7 +12,7 @@ import { AppComponent }   from './app.component';
 describe('Component: App', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [

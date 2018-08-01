@@ -55,12 +55,12 @@ export class ParliamentarianFiltersComponent implements OnInit {
   private getFormGroup(filters: Array<Filter>): Promise<FormGroup> {
     return new Promise((resolve) => {
       const formArrayList: Array<FormArray> = [];
-  
+
       for (const filter of filters) {
         const controls = filter.options.map((option) => new FormControl(false));
         formArrayList[filter.name] = new FormArray(controls);
       }
-      
+
       setTimeout(() => {
         resolve(this.formBuilder.group(formArrayList));
       }, 10000);

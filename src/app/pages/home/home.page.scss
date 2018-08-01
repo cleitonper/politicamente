@@ -11,7 +11,7 @@
   box-sizing: border-box;
   height: calc(100vh - 56px);
   padding: 112px 16px 32px;
-  background-image: url("assets/imgs/home/top-banner.jpg");
+  background-image: url("/assets/imgs/home/top-banner.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -236,7 +236,7 @@
       order: 4;
       border-color: var(--color-dark);
       color: var(--color-dark);
-  
+
       .ripple-effect {
         background-color: var(--color-dark);
       }

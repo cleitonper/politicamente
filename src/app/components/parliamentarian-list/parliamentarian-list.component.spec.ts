@@ -16,16 +16,11 @@ import {
   ParliamentarianState,
 }                                        from '../../state/parliamentarian';
 import {
-  Parliamentarian,
-  ParliamentarianList,
-}                                        from '../../shared/model/parliamentarian.model';
-import {
   ParliamentarianService,
   MockParliamentarianService
 }                                      from '../../services/parliamentarian.service';
 import { generateParliamentarianList } from '../../shared/util';
 import { BrowserAnimationsModule }     from '@angular/platform-browser/animations';
-import { InfiniteScroll } from '@ionic/angular';
 
 describe('Component: ParliamentarianList', () => {
   let component: ParliamentarianListComponent;
@@ -48,7 +43,7 @@ describe('Component: ParliamentarianList', () => {
     })
     .compileComponents();
   }));
-  
+
   beforeEach(() => {
     parliamentarianService = TestBed.get(ParliamentarianService);
     fixture = TestBed.createComponent(ParliamentarianListComponent);
@@ -114,7 +109,7 @@ describe('Component: ParliamentarianList', () => {
   it('should dispatch a LoadList action when load more items', () => {
     const spy = spyOn(store, 'dispatch');
     const action = new ParliamentarianAction.LoadList();
-    const infiniteScroll = { target: { complete: ():void => {} } };
+    const infiniteScroll = { target: { complete: (): void => {} } };
     component.loadMore(infiniteScroll);
     expect(spy).toHaveBeenCalledWith(action);
   });
