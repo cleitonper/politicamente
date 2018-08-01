@@ -1,13 +1,20 @@
-import { ParliamentarianEffects } from "./parliamentarian.effect";
-import { TestBed } from "@angular/core/testing";
-import { StateModule } from "../state.module";
-import { ParliamentarianAction } from ".";
-import { generateParliamentarianList, generateParliamentarian } from "../../shared/util";
-import { hot, cold } from 'jasmine-marbles';
-import { HttpClientModule, HttpErrorResponse } from "@angular/common/http";
-import { ParliamentarianService } from "../../services/parliamentarian.service";
-import { Observable } from "rxjs";
+import {
+  HttpClientModule,
+  HttpErrorResponse,
+}                             from '@angular/common/http';
+import { TestBed }            from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { hot, cold }          from 'jasmine-marbles';
+import { Observable }         from 'rxjs';
+
+import {
+  generateParliamentarianList,
+  generateParliamentarian,
+}                                 from '../../shared/util';
+import { ParliamentarianEffects } from './parliamentarian.effect';
+import { StateModule }            from '../state.module';
+import { ParliamentarianAction }  from '.';
+import { ParliamentarianService } from '../../services/parliamentarian.service';
 
 describe('Effect: Parliamentarian', () => {
   let effect: ParliamentarianEffects;
@@ -43,7 +50,7 @@ describe('Effect: Parliamentarian', () => {
     const response = cold('-b|    ', { b: parliamentarians });
     const expected = cold('--(cd)-', { c: loadListSucces, d: setPage });
     spyOn(service, 'list').and.returnValue(response);
-    
+
     expect(effect.loadList).toBeObservable(expected);
   });
 
@@ -114,7 +121,7 @@ describe('Effect: Parliamentarian', () => {
     const setFilters = new ParliamentarianAction.SetFilters({ pagina: 1 });
     const filterSuccess = new ParliamentarianAction.FilterSuccess(parliamentarians.data);
     const setPage = new ParliamentarianAction.SetPage(parliamentarians.page);
-    
+
     actions =         hot('-a-----', { a: setFilters });
     const response = cold('-b|    ', { b: parliamentarians });
     const expected = cold('--(cd)-', { c: filterSuccess, d: setPage });

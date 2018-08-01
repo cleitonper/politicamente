@@ -4,8 +4,6 @@ import { Effect, Actions, ofType } from '@ngrx/effects';
 import { Action, Store }           from '@ngrx/store';
 import {
   Observable,
-  fromEvent,
-  merge,
   of,
 }                                  from 'rxjs';
 import {
@@ -13,12 +11,11 @@ import {
   catchError,
   switchMap,
   pluck,
-  mapTo,
   map,
 }                                  from 'rxjs/operators';
 
 import { ParliamentarianService }  from '../../services/parliamentarian.service';
-import { AppState }                from '../app.state';
+import { RootState }               from '../root.state';
 import {
   ParliamentarianActionType,
   LoadListSuccess,
@@ -36,23 +33,11 @@ import { customError }             from '../../shared/util';
 
 @Injectable()
 export class ParliamentarianEffects {
-  private online$: Observable<boolean>;
-
   constructor(
     private actions: Actions,
-    private store: Store<AppState>,
+    private store: Store<RootState>,
     private parliamentarianService: ParliamentarianService,
-  ) {
-    this.init();
-  }
-
-  private init() {
-    this.online$ = merge(
-      of(navigator.onLine),
-      fromEvent(window, 'online').pipe(mapTo(true)),
-      fromEvent(window, 'offline').pipe(mapTo(false)),
-    );
-  }
+  ) {}
 
   @Effect()
   loadList: Observable<Action> = this.actions.pipe(
@@ -66,9 +51,9 @@ export class ParliamentarianEffects {
       ]),
       catchError(
         (error: HttpErrorResponse) => of(error).pipe(
-          withLatestFrom(this.online$),
+          withLatestFrom(this.store),
           switchMap(
-            ([error, isOnline]) => (isOnline) ? of(new LoadError(error.error)) : of(new LoadError(customError.offline.error))
+            ([apiError, store]) => (store.app.online) ? of(new LoadError(apiError.error)) : of(new LoadError(customError.offline.error))
           )
         )
       ),
@@ -90,9 +75,9 @@ export class ParliamentarianEffects {
       map((parliamentarian) => new LoadSuccess(parliamentarian)),
       catchError(
         (error: HttpErrorResponse) => of(error).pipe(
-          withLatestFrom(this.online$),
+          withLatestFrom(this.store),
           switchMap(
-            ([error, isOnline]) => (isOnline) ? of(new LoadError(error.error)) : of(new LoadError(customError.offline.error))
+            ([apiError, store]) => (store.app.online) ? of(new LoadError(apiError.error)) : of(new LoadError(customError.offline.error))
           )
         )
       ),
@@ -123,9 +108,9 @@ export class ParliamentarianEffects {
       }),
       catchError(
         (error: HttpErrorResponse) => of(error).pipe(
-          withLatestFrom(this.online$),
+          withLatestFrom(this.store),
           switchMap(
-            ([error, isOnline]) => (isOnline) ? of(new LoadError(error.error)) : of(new LoadError(customError.offline.error))
+            ([apiError, store]) => (store.app.online) ? of(new LoadError(apiError.error)) : of(new LoadError(customError.offline.error))
           )
         )
       ),
