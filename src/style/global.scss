@@ -16,6 +16,11 @@
 // element in the app.
 
 @import './splash';
+@import './fonts';
+
+body {
+  font-family: Gibson !important;
+}
 
 .color--primary { color: var(--color-primary); }
 .color--gray    { color: var(--color-gray); }
