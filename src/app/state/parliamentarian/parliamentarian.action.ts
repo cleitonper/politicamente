@@ -19,6 +19,7 @@ export enum ParliamentarianActionType {
   FILTER_SUCCESS =     '[Parliamentarian] Filter Success',
   LOAD_ERROR =         '[Parliamentarian] Load Error',
   SELECT =             '[Parliamentarian] Select',
+  REMOVE =             '[Parliamentarian] Remove Selected',
 }
 
 export class LoadList implements Action {
@@ -85,6 +86,9 @@ export class Select implements Action {
   constructor(public payload: number) {}
 }
 
+export class Remove implements Action {
+  readonly type = ParliamentarianActionType.REMOVE;
+}
 
 export type ParliamentarianAction =
   LoadList
@@ -97,4 +101,5 @@ export type ParliamentarianAction =
   | Filter
   | FilterSuccess
   | LoadError
-  | Select;
+  | Select
+  | Remove;

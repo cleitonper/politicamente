@@ -1,0 +1,23 @@
+:host {
+  /deep/ {
+    ion-icon {
+      margin-bottom: 3px;
+    }
+
+    .button {
+      height: 48px;
+      color: var(--color-dark-light);
+    }
+
+    .button-inner {
+      flex-flow: column nowrap;
+      text-transform: none;
+    }
+  }
+
+  &.active {
+    /deep/ .button {
+      color: var(--color-primary);
+    }
+  }
+}

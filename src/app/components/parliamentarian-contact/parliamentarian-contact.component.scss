@@ -1,0 +1,50 @@
+@import 'mixins';
+
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 32px 16px;
+}
+
+.group {
+  box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-light);
+  text-align: center;
+  padding: 16px 8px;
+}
+
+.label {
+  font-size: 24px;
+  color: var(--color-dark);
+  line-height: 1.45em;
+  margin-bottom: 16px;
+  font-weight: 100;
+}
+
+.data {
+  font-size: 20px;
+  color: var(--color-purple);
+  text-decoration: none;
+}
+
+@include for-phone-only {
+  .group {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+@include for-tablet-portrait-up {
+  .group {
+    flex-grow: 1;
+
+    &:not(:last-child) {
+      margin-right: 24px;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<img
+  class="avatar"
+  [src]="parliamentarian?.urlFoto"
+  [alt]="parliamentarian?.nomeEleitoral">
+<h2 class="name">{{ parliamentarian?.nomeEleitoral | lowercase }}</h2>
+<span class="party">
+  Deputado -
+  {{ parliamentarian?.siglaPartido }}
+  {{ parliamentarian?.siglaUf }}
+</span>
+<span class="year">
+  56 anos
+</span>

@@ -34,7 +34,7 @@
       <ion-row [@fadeIn]="length">
         <ion-col *ngFor="let parliamentarian of parliamentarians" col-12 col-md-6 col-lg-4>
           <ion-card class="parliamentarian">
-            <ion-item button padding-right>
+            <ion-item button padding-right (click)="showDetails(parliamentarian.id)">
               <ion-avatar class="avatar">
                 <img [src]="parliamentarian.urlFoto" (error)="setGenericAvatar($event.target)">
               </ion-avatar>
@@ -55,7 +55,7 @@
       </ng-container>
 
     </ion-grid>
-  
+
   </ng-container>
 </ng-container>
 

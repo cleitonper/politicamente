@@ -12,7 +12,7 @@ import {
 } from '../../shared/model/parliamentarian.model';
 
 export interface State extends EntityState<Parliamentarian> {
-  selectedParliamentarianId: number;
+  selectedParliamentarian: Parliamentarian;
   filters: ParliamentarianParams;
   page: Page;
   isLoading: boolean;
@@ -22,7 +22,7 @@ export interface State extends EntityState<Parliamentarian> {
 export const adapter: EntityAdapter<Parliamentarian> = createEntityAdapter();
 
 export const initialState: State = adapter.getInitialState({
-  selectedParliamentarianId: null,
+  selectedParliamentarian: null,
   filters: {
     pagina: 0
   },

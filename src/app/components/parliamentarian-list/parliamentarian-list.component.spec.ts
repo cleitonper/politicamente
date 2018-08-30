@@ -7,6 +7,8 @@ import {
 }                                       from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA }       from '@angular/core';
 import { HttpClientModule }             from '@angular/common/http';
+import { RouterTestingModule }                       from '@angular/router/testing';
+import { BrowserAnimationsModule }      from '@angular/platform-browser/animations';
 import { Store }                        from '@ngrx/store';
 
 import { ParliamentarianListComponent } from './parliamentarian-list.component';
@@ -20,7 +22,6 @@ import {
   MockParliamentarianService
 }                                      from '../../services/parliamentarian.service';
 import { generateParliamentarianList } from '../../shared/util';
-import { BrowserAnimationsModule }     from '@angular/platform-browser/animations';
 
 describe('Component: ParliamentarianList', () => {
   let component: ParliamentarianListComponent;
@@ -36,6 +37,7 @@ describe('Component: ParliamentarianList', () => {
         StateModule,
         HttpClientModule,
         BrowserAnimationsModule,
+        RouterTestingModule,
       ],
       providers: [
         { provide: ParliamentarianService, useClass: MockParliamentarianService },

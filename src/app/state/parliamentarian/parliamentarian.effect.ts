@@ -12,6 +12,7 @@ import {
   switchMap,
   pluck,
   map,
+  delay,
 }                                  from 'rxjs/operators';
 
 import { ParliamentarianService }  from '../../services/parliamentarian.service';
@@ -28,6 +29,7 @@ import {
   IncrementPage,
   LoadError,
   SetPage,
+  Select,
 }                                  from './parliamentarian.action';
 import { customError }             from '../../shared/util';
 
@@ -68,9 +70,16 @@ export class ParliamentarianEffects {
   );
 
   @Effect()
+  select: Observable<Action> = this.actions.pipe(
+    ofType<Select>(ParliamentarianActionType.SELECT),
+    delay(0),
+    map((action) => new Load(action.payload))
+  );
+
+  @Effect()
   load: Observable<Action> = this.actions.pipe(
     ofType<Load>(ParliamentarianActionType.LOAD),
-    pluck('payload', 'id'),
+    pluck('payload'),
     switchMap((id: number) => this.parliamentarianService.read(id).pipe(
       map((parliamentarian) => new LoadSuccess(parliamentarian)),
       catchError(

@@ -1,0 +1,11 @@
+:host {
+  border-width: 1px 0px;
+  border-color: rgba(var(--color-dark-light-rgb), .5);
+  border-style: solid;
+  padding: 0px 16px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-light);
+}

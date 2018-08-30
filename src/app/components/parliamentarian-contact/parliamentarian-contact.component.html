@@ -1,0 +1,40 @@
+<ng-container *ngIf="parliamentarian?.gabinete">
+  <div class="group">
+    <div class="label">
+      Quero falar com
+      <br>
+      o parlamentar
+    </div>
+    <a
+      target="_blank"
+      href="tel:{{ parliamentarian.gabinete.telefone | noDash }}"
+      title="Clique para telefonar - Somente Mobile"
+      class="data">{{ parliamentarian.gabinete.telefone }}</a>
+  </div>
+  <div class="group">
+    <div class="label">
+      Quero enviar
+      <br>
+      uma mensagem
+    </div>
+    <a
+      target="_blank"
+      href="mailto:{{ parliamentarian.gabinete.email | lowercase }}"
+      title="Clique para enviar um email para {{ parliamentarian.gabinete.email | lowercase }}"
+      class="data">Email</a>
+  </div>
+  <div class="group">
+    <div class="label">
+      Quero localizar
+      <br>
+      o gabinete
+    </div>
+    <a
+      target="_blank"
+      href="https://www.google.com/maps/search/?api=1&query={{ address }}"
+      title="Clique para ver no mapa - {{ address }}"
+      class="data">
+      Endereço
+    </a>
+  </div>
+</ng-container>

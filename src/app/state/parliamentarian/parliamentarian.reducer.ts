@@ -19,8 +19,10 @@ export function parliamentarianReducer(
       const newState = { ...state, isLoading: false, error: null };
       return adapter.addMany(action.payload, newState);
     }
+    case ParliamentarianActionType.LOAD:
+      return{ ...state, isLoading: true };
     case ParliamentarianActionType.LOAD_SUCCESS:
-      return adapter.addOne(action.payload, state);
+      return{ ...state, isLoading: false, error: null, selectedParliamentarian: action.payload };
     case ParliamentarianActionType.INCREMENT_PAGE:
       return { ...state, filters: { ...state.filters, pagina: action.payload } };
     case ParliamentarianActionType.FILTER:
@@ -35,8 +37,8 @@ export function parliamentarianReducer(
       return { ...state, page: action.payload };
     case ParliamentarianActionType.LOAD_ERROR:
       return { ...state, error: action.payload, isLoading: false };
-    case ParliamentarianActionType.SELECT:
-      return { ...state, selectedParliamentarianId: action.payload };
+    case ParliamentarianActionType.REMOVE:
+      return { ...state, selectedParliamentarian: null };
     default:
       return state;
   }

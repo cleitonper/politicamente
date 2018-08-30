@@ -4,13 +4,30 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule }          from '@ionic/angular';
 
-import { ParliamentariansPage } from './parliamentarians.page';
-import { ComponentsModule }     from '../../components/components.module';
+import { ParliamentariansPage }      from './index/parliamentarians.page';
+import { ComponentsModule }          from '../../components/components.module';
+import { ParliamentarianDetailPage } from './detail/parliamentarian-detail.page';
+import { ParliamentarianContactComponent }  from '../../components/parliamentarian-contact/parliamentarian-contact.component';
+import { ParliamentarianSpendingComponent } from '../../components/parliamentarian-spending/parliamentarian-spending.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ParliamentariansPage
+    children: [
+      {
+        path: '',
+        component: ParliamentariansPage,
+      },
+      {
+        path: ':id',
+        component: ParliamentarianDetailPage,
+        children: [
+          { path: 'contact', component: ParliamentarianContactComponent },
+          { path: 'spending', component: ParliamentarianSpendingComponent },
+          { path: '', redirectTo: 'contact' },
+        ],
+      },
+    ]
   }
 ];
 
@@ -21,6 +38,9 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ParliamentariansPage]
+  declarations: [
+    ParliamentariansPage,
+    ParliamentarianDetailPage,
+  ],
 })
 export class ParliamentariansPageModule {}

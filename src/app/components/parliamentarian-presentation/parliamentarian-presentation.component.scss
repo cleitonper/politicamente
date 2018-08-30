@@ -1,0 +1,44 @@
+:host {
+  padding: 0px 16px;
+  display: grid;
+  grid:
+    "avatar empty" 1fr
+    "avatar name" 30px
+    "avatar party" 24px
+    "avatar year" 30px /
+    114px 1fr;
+
+    .name,
+    .party,
+    .year {
+      line-height: 1.35em;
+      color: var(--color-dark-medium);
+      margin: 2px 0px 0px 8px;
+      overflow: hidden;
+    }
+
+    .party,
+    .year {
+      font-size: 18px;
+    }
+
+    .avatar {
+      grid-area: avatar;
+      box-shadow: 0px -2px 2px 1px rgba(0, 0, 0, .5);
+    }
+
+    .name {
+      grid-area: name;
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: capitalize;
+    }
+
+    .party {
+      grid-area: party;
+    }
+
+    .year {
+      grid-area: year;
+    }
+}

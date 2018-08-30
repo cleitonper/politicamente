@@ -14,7 +14,7 @@ const { selectAll } = adapter.getSelectors();
 const selectParliamentarianState =
   createFeatureSelector<State>('parliamentarian');
 
-const getSelectedParliamentarianId = (state: State) => state.selectedParliamentarianId;
+const getSelectedParliamentarian = (state: State) => state.selectedParliamentarian;
 const getEerror = (state: State) => state.error;
 const getIsLoading = (state: State) => state.isLoading;
 const getPage = (state: State) => state.page;
@@ -25,9 +25,9 @@ export const list = createSelector(
   selectAll
 );
 
-export const selectedParliamentarianId = createSelector(
+export const selectedParliamentarian = createSelector(
   selectParliamentarianState,
-  getSelectedParliamentarianId
+  getSelectedParliamentarian
 );
 
 export const isLoading = createSelector(

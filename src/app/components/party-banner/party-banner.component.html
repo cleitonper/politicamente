@@ -1,0 +1,14 @@
+<picture class="party-logo">
+  <source
+    media="(max-width: {{ portrait }})"
+    srcset="/assets/party/{{ initials }}/portrait.svg"
+  >
+  <source
+    media="(min-width: {{ landscape }})"
+    srcset="/assets/party/{{ initials }}/landscape.svg"
+  >
+  <img
+    src="/assets/party/{{ initials }}/landscape.svg"
+    (load)="imageLoad($event.target)"
+  >
+</picture>

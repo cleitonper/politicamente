@@ -1,0 +1,75 @@
+@import 'mixins';
+
+:host {
+  background-color: var(--color-gray-light);
+}
+
+/deep/ .scroll {
+  overflow-y: auto;
+}
+
+ion-toolbar {
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, .1),
+    transparent
+  );
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  /deep/ .toolbar-background {
+    background-color: transparent;
+  }
+
+  ion-back-button /deep/ ion-icon,
+  ion-button ion-icon {
+    font-size: 24px;
+    color: transparent;
+    transition: color 400ms;
+  }
+
+  &.dark {
+    ion-back-button /deep/ ion-icon,
+    ion-button ion-icon {
+      color: var(--color-dark);
+    }
+  }
+
+  &.light {
+    ion-back-button /deep/ ion-icon,
+    ion-button ion-icon {
+      color: var(--color-light);
+    }
+  }
+}
+
+.banner {
+  width: 100%;
+}
+
+.presentation {
+  @include for-phone-only {
+    margin-top: -70px;
+    padding-bottom: 16px;
+    background-color: var(--color-light);
+  }
+
+  @include for-tablet-portrait-up {
+    margin-top: -157px;
+    position: relative;
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(0, 0, 0, .5)
+    );
+
+    &.light /deep/ {
+      .name,
+      .party,
+      .year {
+        color: var(--color-light);
+      }
+    }
+  }
+}

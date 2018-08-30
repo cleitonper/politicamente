@@ -1,15 +1,18 @@
 import { Injectable, Injector } from '@angular/core';
-import { Observable, of }           from 'rxjs';
+import { Observable, of }       from 'rxjs';
 import { map }                  from 'rxjs/operators';
 
 import { ApiService }           from './api.service';
-import { ApiResponseList }      from '../shared/model/api-response-list.model';
+import { ApiResponse }          from '../shared/model/api-response-list.model';
 import {
   Parliamentarian,
   ParliamentarianList
 }                               from '../shared/model/parliamentarian.model';
-import { Page } from '../shared/model/page.model';
-import { generateParliamentarianList, generateParliamentarian } from '../shared/util';
+import { Page }                 from '../shared/model/page.model';
+import {
+  generateParliamentarianList,
+  generateParliamentarian,
+}                               from '../shared/util';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +27,8 @@ export class ParliamentarianService extends ApiService {
   public list(params?): Observable<ParliamentarianList> {
     const url = `${this.apiRoot}/${this.resourceName}`;
     const options = { params: params || {} };
-    const request = this.http.get<ApiResponseList<Parliamentarian>>(url, options).pipe(
-      map((list: ApiResponseList<Parliamentarian>) => (
+    const request = this.http.get<ApiResponse<Array<Parliamentarian>>>(url, options).pipe(
+      map((list: ApiResponse<Array<Parliamentarian>>) => (
         { data: list.dados, page: this.extractPage(list.links) }
       )),
     );
@@ -35,7 +38,15 @@ export class ParliamentarianService extends ApiService {
 
   public read(id: number): Observable<Parliamentarian> {
     const url = `${this.apiRoot}/${this.resourceName}/${id}`;
-    const request = this.http.get<Parliamentarian>(url);
+    const request = this.http.get<ApiResponse<Parliamentarian>>(url).pipe(
+      map((parliamentarian) => parliamentarian.dados),
+      map(
+        (parliamentarian) =>
+          (parliamentarian.ultimoStatus)
+            ? { ...parliamentarian, ...parliamentarian.ultimoStatus }
+            : parliamentarian
+      ),
+    );
 
     return request;
   }

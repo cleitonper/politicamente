@@ -1,0 +1,51 @@
+<ion-content>
+  <ion-toolbar [ngClass]="mode" padding-horizontal>
+    <ion-buttons slot="start">
+      <ion-back-button icon="arrow-back" defaultHref="parliamentarians"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="share"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ng-container *ngIf="(parliamentarian$ | async) as parliamentarian">
+    <app-party-banner
+      class="banner"
+      (bannerLoaded)="bannerLoaded($event)"
+      [initials]="parliamentarian.siglaPartido">
+    </app-party-banner>
+
+    <app-parliamentarian-presentation
+      class="presentation"
+      [ngClass]="mode"
+      [parliamentarian]="parliamentarian">
+    </app-parliamentarian-presentation>
+
+    <app-tabs>
+      <app-tab
+        [routerLink]="['./contact']"
+        [routerLinkActive]="['active']"
+        label="Contato"
+        icon="person">
+      </app-tab>
+      <app-tab
+        disabled
+        label="Gastos"
+        icon="cash">
+      </app-tab>
+      <app-tab
+        disabled
+        label="Proposições"
+        icon="book">
+      </app-tab>
+    </app-tabs>
+
+    <router-outlet></router-outlet>
+
+  </ng-container>
+
+  <app-footer></app-footer>
+
+</ion-content>

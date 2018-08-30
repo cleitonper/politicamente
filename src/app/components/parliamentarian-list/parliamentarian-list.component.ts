@@ -3,6 +3,7 @@ import {
   OnDestroy,
   OnInit,
 }                              from '@angular/core';
+import { Router }              from '@angular/router';
 import { HttpErrorResponse }   from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Store }               from '@ngrx/store';
@@ -40,9 +41,10 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
   public page$: Observable<Page>;
   public error$: Observable<HttpErrorResponse>;
   public filters$: Observable<ParliamentarianParams>;
-  private ngUnsubscribe = new Subject();
+  private destroy$ = new Subject();
 
   constructor(
+    private router: Router,
     private store: Store<ParliamentarianState.State>
   ) {}
 
@@ -52,8 +54,8 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public setGenericAvatar(element): void {
@@ -66,9 +68,13 @@ export class ParliamentarianListComponent implements OnInit, OnDestroy {
     infiniteScroll.target.complete();
   }
 
+  public showDetails(id: number) {
+    return this.router.navigateByUrl(`/parliamentarians/${id}`);
+  }
+
   private initializeAutoSearch() {
     this.searchedTerm$.pipe(
-      takeUntil(this.ngUnsubscribe),
+      takeUntil(this.destroy$),
       debounceTime(400),
       distinctUntilChanged(),
       map(term => this.store.dispatch
