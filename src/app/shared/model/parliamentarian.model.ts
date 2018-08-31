@@ -1,46 +1,42 @@
 import { Page } from './page.model';
 
+/**
+ * For more details check API Reference:
+ * https://dadosabertos.camara.leg.br/swagger/api.html
+ **/
 export interface Parliamentarian {
-    /**
-     * Parliamentarian identification number
-     * based on the API.
-    **/
     id: number;
-
-    /**
-     * Page data uri
-    **/
     uri: string;
-
-    /**
-     * Full name
-    **/
-    nome: string;
-
-    /**
-     * Political party initials
-    **/
-    siglaPartido: string;
-
-    /**
-     * Political party data uri
-    **/
-    uriPartido: string;
-
-    /**
-     * State initials
-    **/
-    siglaUf: string;
-
-    /**
-     * Legislature id
-    **/
-    idLegislatura: number;
-
-    /**
-     * Photo uri
-    **/
-    urlFoto: string;
+    cpf?: string;
+    nome?: string;
+    nomeCivil?: string;
+    nomeEleitoral?: string;
+    sexo?: string;
+    urlWebsite?: string;
+    redeSocial?: string;
+    siglaPartido?: string;
+    uriPartido?: string;
+    siglaUf?: string;
+    ufNascimento?: string;
+    municipioNascimento?: string;
+    escolaridade?: string;
+    idLegislatura?: number;
+    urlFoto?: string;
+    dataNascimento?: string;
+    dataFalecimento?: string;
+    data?: string;
+    gabinete?: {
+      nome:     string,
+      predio:   string,
+      sala:     string,
+      andar:    string,
+      telefone: string,
+      email:    string,
+    };
+    situacao?: string;
+    condicaoEleitoral?: string;
+    descricaoStatus?: string;
+    ultimoStatus?: Partial<Parliamentarian>;
 }
 
 export interface ParliamentarianParams {

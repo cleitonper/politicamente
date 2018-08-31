@@ -1,5 +1,5 @@
-export interface ApiResponseList<T> {
-  dados: Array<T>;
+export interface ApiResponse<T> {
+  dados: T;
   links?: Array<any>;
   nextPage?: number;
 }
