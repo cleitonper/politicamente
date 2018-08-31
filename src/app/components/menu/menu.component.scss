@@ -1,3 +1,7 @@
+:host {
+  background-color: var(--color-light);
+}
+
 ion-menu /deep/ .menu-inner {
   justify-content: flex-start;
   overflow-y: auto;

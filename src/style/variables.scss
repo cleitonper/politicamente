@@ -34,7 +34,7 @@
   /** light **/
   --color-light: #f4f4f4;
   --color-light-rgb: 244,244,244;
-  
+
   /** gray **/
   --color-gray: #666666;
   --color-gray-rgb: 102, 102, 102;
@@ -64,7 +64,7 @@
   --color-purple-light-rgb: 86, 114, 254;
 
 
-  
+
   /** Ionic Variables **/
   /**
   *   The variables descrebed bellow was
@@ -76,6 +76,9 @@
   --ion-color-primary: var(--color-primary);
   --ion-color-secondary: var(--color-secondary);
   --ion-color-tertiary: var(--color-tertiary);
+
+  /** Backgrounds **/
+  --ion-background-color: transparent;
 
   /** Toolbar **/
   --ion-toolbar-background-color: var(--color-dark);

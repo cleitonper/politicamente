@@ -61,10 +61,10 @@
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: flex-start;
+  background-color: var(--color-light);
 
   @include for-tablet-portrait-up {
-    padding: 0px 16px;
-    margin-bottom: 48px;
+    padding: 0px 16px 48px;
   }
 }
 
